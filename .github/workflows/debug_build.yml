@@ -10,12 +10,12 @@ jobs:
       uses: actions/checkout@v2
     - name: Build
       run: |
-        ./gradlew assembleDebug
+        ./gradlew assembleRelease
         
     - name: Sign the apk
       uses: r0adkll/sign-android-release@v1
       with:
-        releaseDirectory: app/build/outputs/apk/debug
+        releaseDirectory: app/build/outputs/apk/release
         signingKeyBase64: ${{ secrets.SIGNING_KEY }}
         alias: ${{ secrets.ALIAS }}
         keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
@@ -24,4 +24,4 @@ jobs:
       uses: actions/upload-artifact@v1
       with:
         name: termux-tasker
-        path: ./app/build/outputs/apk/debug/app-debug.apk
+        path: ./app/build/outputs/apk/release/app-release.apk
